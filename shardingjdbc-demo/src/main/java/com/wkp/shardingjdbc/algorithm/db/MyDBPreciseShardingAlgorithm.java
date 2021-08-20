@@ -33,7 +33,8 @@ public class MyDBPreciseShardingAlgorithm implements PreciseShardingAlgorithm {
                 return each.toString();
             }
         }
-        throw new UnsupportedOperationException("未找到分片数据节点");
+        //这里不要抛异常，否则只分库不分表/只分表不分库的情况下回报错
+        return null;
     }
 
 }
