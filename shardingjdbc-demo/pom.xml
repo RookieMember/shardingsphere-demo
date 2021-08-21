@@ -15,6 +15,9 @@
     <description>shardingjdbc demo</description>
     <properties>
         <java.version>1.8</java.version>
+        <shardingsphere.version>4.1.1</shardingsphere.version>
+        <!-- 对Swagger的集成 -->
+        <springfox.swagger2.version>2.9.2</springfox.swagger2.version>
     </properties>
     <dependencies>
 
@@ -27,6 +30,16 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>${springfox.swagger2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>${springfox.swagger2.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -67,7 +80,7 @@
         <dependency>
             <groupId>org.apache.shardingsphere</groupId>
             <artifactId>sharding-jdbc-spring-boot-starter</artifactId>
-            <version>4.1.1</version>
+            <version>${shardingsphere.version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.springframework.boot</groupId>
@@ -79,6 +92,21 @@
                 </exclusion>
             </exclusions>
         </dependency>
+
+        <!-- for spring boot 使用编排治理的依赖时要去掉上面的sharding-jdbc-spring-boot-starter-->
+      <!--  <dependency>
+            <groupId>org.apache.shardingsphere</groupId>
+            <artifactId>sharding-jdbc-orchestration-spring-boot-starter</artifactId>
+            <version>${shardingsphere.version}</version>
+        </dependency>
+
+        &lt;!&ndash;若使用zookeeper, 请加入下面Maven坐标&ndash;&gt;
+        <dependency>
+            <groupId>org.apache.shardingsphere</groupId>
+            <artifactId>sharding-orchestration-center-zookeeper-curator</artifactId>
+            <version>${shardingsphere.version}</version>
+        </dependency>-->
+
     </dependencies>
 
     <build>
@@ -86,14 +114,14 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
+                <!--<configuration>
                     <excludes>
                         <exclude>
                             <groupId>org.projectlombok</groupId>
                             <artifactId>lombok</artifactId>
                         </exclude>
                     </excludes>
-                </configuration>
+                </configuration>-->
             </plugin>
         </plugins>
     </build>
