@@ -95,7 +95,8 @@ public class OrderServiceImpl {
 
     public OrderInfoDto selectOrderItemWithIn(long start,long end){
         try {
-            return new OrderInfoDto(null,orderItemMapper.selectWithInCondition(start,end));
+            return new OrderInfoDto(null,orderItemMapper.selectWithInCondition());
+//            return new OrderInfoDto(null,orderItemMapper.selectWithInCondition(start,end));
         } catch (SQLException e) {
             log.info(e.getMessage(),e.getCause());
         }

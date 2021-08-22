@@ -72,7 +72,7 @@ public class ShardingController {
      * @return
      */
     @GetMapping("/item_range_list")
-    @ApiOperation(value = "商品范围查询")
+    @ApiOperation(value = "订单商品【分片键】范围查询")
     public OrderInfoDto orderItemRangeList(int start,int end){
         return orderService.selectOrderItemRange(start,end);
     }

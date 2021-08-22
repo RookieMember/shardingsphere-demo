@@ -26,14 +26,18 @@ public interface OrderItemMapper {
     List<OrderItem> selectAll() throws SQLException;
 
     /**
-     * 绑定表,避免无笛卡尔积查询现象，
+     * 绑定表,避免无笛卡尔积查询现象，(in条件绑定表失效？？？)
      * @param start
      * @param end
      * @return
      * @throws SQLException
      */
-    @Select("SELECT i.* FROM t_order o JOIN t_order_item i ON o.order_id=i.order_id WHERE o.order_id = 0 or o.order_id = 1")
-    List<OrderItem> selectWithInCondition(@Param("start") long start,@Param("end") long end) throws SQLException;
+    @Select("SELECT i.* FROM t_order o JOIN t_order_item i ON o.order_id=i.order_id WHERE o.order_id in(0,1)")
+    List<OrderItem> selectWithInCondition() throws SQLException;
+//    @Select("SELECT i.* FROM t_order o JOIN t_order_item i ON o.order_id=i.order_id WHERE o.order_id in(0,1)")
+//    List<OrderItem> selectWithInCondition(@Param("start") long start,@Param("end") long end) throws SQLException;
+//    @Select("SELECT i.* FROM t_order o JOIN t_order_item i ON o.order_id=i.order_id WHERE o.order_id = 0 or o.order_id = 1")
+//    List<OrderItem> selectWithInCondition(@Param("start") long start,@Param("end") long end) throws SQLException;
 
     /**
      * 不支持该路由规则
