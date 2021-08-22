@@ -46,7 +46,7 @@ public class MyDistributedIdGenerator implements ShardingKeyGenerator {
      */
     @Override
     public Comparable<?> generateKey() {
-        //这里举个例子，实际上可以结合redis进行实现
+        //这里举个简单的例子，可以根据自己的需求进行实现
         String time = parseStringFromDate(new Date());
         int suffix = random.nextInt(5000) + random.nextInt(5000);
         String genNo=time + suffix;

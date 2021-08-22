@@ -29,14 +29,22 @@ public class MyDBRangeShardingAlgorithm implements RangeShardingAlgorithm {
     @Override
     public Collection<String> doSharding(Collection availableTargetNames, RangeShardingValue shardingValue) {
         // sql语句中范围查询between and 的起始值
-        Long lower= (Long) shardingValue.getValueRange().lowerEndpoint();
-        Long upper = (Long) shardingValue.getValueRange().upperEndpoint();
+        Integer lower= (Integer) shardingValue.getValueRange().lowerEndpoint();
+        Integer upper = (Integer) shardingValue.getValueRange().upperEndpoint();
         //是否有查询的下界限，上界限
         boolean hasLowerBound = shardingValue.getValueRange().hasLowerBound();
         boolean hasUpperBound = shardingValue.getValueRange().hasUpperBound();
 
         List<String> shardingList = new ArrayList<>();
         //TODO 自定义范围分片逻辑
+        for (int i = lower; i <= upper ; i++) {
+            int remainder = i % 2;
+            for(Object each:availableTargetNames){
+                if(each.toString().endsWith(remainder+"")){
+                    shardingList.add(each.toString());
+                }
+            }
+        }
         return shardingList;
     }
 }
